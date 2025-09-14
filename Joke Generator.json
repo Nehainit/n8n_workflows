@@ -1,0 +1,107 @@
+{
+  "name": "Joke Generator",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "f4551b0c-fb4e-4816-99f0-cf41af115cdd",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "url": "https://official-joke-api.appspot.com/random_joke",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "49658b1c-8abe-4ad7-bb4f-11182c5afb10",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "21500074-4aa2-4278-b74f-b18b09c75cfb",
+              "name": "",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "83b923a3-b8a0-4ac8-984d-349367794197",
+              "name": "=joke_setup",
+              "value": "={{ $json.setup }}\n",
+              "type": "string"
+            },
+            {
+              "id": "a0ed087c-e3c9-49ae-abaf-322f32f4cecc",
+              "name": "joke_punchline",
+              "value": "={{ $json.punchline }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        416,
+        0
+      ],
+      "id": "5e631b1b-8924-47e6-8dae-077302816512",
+      "name": "Edit Fields",
+      "notesInFlow": false
+    }
+  ],
+  "pinData": {
+    "When clicking ‘Execute workflow’": [
+      {
+        "json": {}
+      }
+    ]
+  },
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "d537299e-4f44-4f91-ae0c-555a6eb83ed0",
+  "meta": {
+    "instanceId": "cc0427d1f3e828138f5cf4d084324c78d8a90b77bb013bf7d248137caec7b254"
+  },
+  "id": "EWi30jguJRFMfqpV",
+  "tags": []
+}
